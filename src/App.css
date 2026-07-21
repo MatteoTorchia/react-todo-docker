@@ -1,0 +1,43 @@
+body {
+  font-family: sans-serif;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background-color: rgb(255, 227, 191);
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #2bd600;
+  font-style: italic;
+}
+
+.filters {
+  margin: 15px 0;
+}
+
+.button {
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: #ffab3c;
+}
+
+.delete-button:hover {
+  background-color: #fc2e2e;
+}
+
+.active-filter {
+  font-weight: bold;
+  background-color: #d87d06;
+}

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. DATABASE MYSQL
+  db:
+    image: mysql:8.0
+    container_name: todo-mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: todo_user
+      MYSQL_PASSWORD: todo_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # 2. BACKEND NODE.JS
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: todo_user
+      DB_PASSWORD: todo_pass
+      DB_NAME: todo_db
+    depends_on:
+      - db
+
+  # 3. FRONTEND REACT + NGINX
+  frontend:
+    build: .
+    container_name: mia-todo-container
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
